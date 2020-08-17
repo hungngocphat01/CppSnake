@@ -2,11 +2,13 @@
 #define TEXTURE_MAX_HEIGHT 12
 #define TEXTURE_MAX_WIDTH 70
 
-
-
 void pauseProg() {
     nodelay(stdscr, FALSE);	
-    getch();
+    char c;
+    do
+    {
+        c = getch();
+    } while (c != ' ');
     nodelay(stdscr, TRUE);
 }
 
@@ -93,7 +95,7 @@ inline void gameOver() {
 void checkTermSize() {
     while (SCR_WIDTH < MINW || SCR_HEIGHT < MINH) {
         clear();
-		mvprintw(0, 0, "Your terminal size is insufficent to play the game.\nResize it to at least %dx%d (WxH) and press any key to continue.\nCurrent size: %dx%d", MINW, MINH, SCR_WIDTH, SCR_HEIGHT);
+		mvprintw(0, 0, "Your terminal size is insufficent to play the game.\nResize it to at least %dx%d (WxH) and press SPACE to continue.\nCurrent size: %dx%d", MINW, MINH, SCR_WIDTH, SCR_HEIGHT);
         refresh();
         pauseProg();
         getmaxyx(stdscr, SCR_HEIGHT, SCR_WIDTH);	
