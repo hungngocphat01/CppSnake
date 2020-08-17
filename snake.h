@@ -3,6 +3,10 @@ struct point {
 	int y = 0;
 };
 
+#define DEFAULT_HEAD "@"
+#define DEFAULT_BODY "O"
+#define DEFAULT_FOOD "X"
+
 struct snake {
 	unsigned len = 1; // Length of the snake
 	point body[50]; // Coordinates of the snake's body blocks. snake head = 0

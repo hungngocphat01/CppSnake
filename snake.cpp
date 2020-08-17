@@ -6,9 +6,9 @@ int randomInt(int start, int end) {
 }
 
 void snake::drawsnake() {
-    mvprintw(this->head.y, this->head.x, "O");
+    mvprintw(this->head.y, this->head.x, DEFAULT_HEAD);
     for (unsigned i = 1; i < this->len; i++) {
-        mvprintw(this->body[i].y, this->body[i].x, "X");
+        mvprintw(this->body[i].y, this->body[i].x, DEFAULT_BODY);
     }
 }
 
@@ -20,7 +20,7 @@ void snake::genfood() {
 }
 
 void snake::drawfood() {
-    mvprintw(this->prey.y, this->prey.x, ".");
+    mvprintw(this->prey.y, this->prey.x, DEFAULT_FOOD);
 }
 
 void snake::grow() {
