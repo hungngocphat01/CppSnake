@@ -1,26 +1,29 @@
 #include "snake.h"
 #include "declarations.h"
 
+char bodyc[2] = "O", headc[2] = "@", foodc[2] = "X";
+char borderc[2] = "#";
+
 int randomInt(int start, int end) {
     return rand() % (end - start + 1) + start;
 }
 
 void snake::drawsnake() {
-    mvprintw(this->head.y, this->head.x, DEFAULT_HEAD);
+    mvprintw(this->head.y, this->head.x, headc);
     for (unsigned i = 1; i < this->len; i++) {
-        mvprintw(this->body[i].y, this->body[i].x, DEFAULT_BODY);
+        mvprintw(this->body[i].y, this->body[i].x, bodyc);
     }
 }
 
 void snake::genfood() {
     do {
-        this->prey.x = randomInt(2, SWIDTH - 2);
-        this->prey.y = randomInt(2, SHEIGHT - 2);
+        this->prey.x = randomInt(2, SCR_WIDTH - 2);
+        this->prey.y = randomInt(2, SCR_HEIGHT - 2);
     } while (this->overlaps(this->prey));
 }
 
 void snake::drawfood() {
-    mvprintw(this->prey.y, this->prey.x, DEFAULT_FOOD);
+    mvprintw(this->prey.y, this->prey.x, foodc);
 }
 
 void snake::grow() {
@@ -71,7 +74,7 @@ void snake::move(char direction) {
         GAMEOVER = true;
     }
     // Check if the snake go out of bounds
-    if (this->head.x >= SWIDTH - 1 || this->head.x < 1 || this->head.y >= SHEIGHT - 1 || this->head.y < 1) {
+    if (this->head.x >= SCR_WIDTH - 1 || this->head.x < 1 || this->head.y >= SCR_HEIGHT - 1 || this->head.y < 1) {
         GAMEOVER = true;
     }
 }
