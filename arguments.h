@@ -16,6 +16,15 @@ argp_option options[] = {
     { 0 }
 };
 
+bool ifHelp(int argc, char** argv) {
+    for (unsigned i = 0; i < argc; i++) {
+        if (!strcmp(argv[i], "--help")) {
+            return true;
+        }
+    }
+    return false;
+} 
+
 static error_t parse_opt(int key, char* arg, argp_state* state) {
     switch (key) {
     case 'b':

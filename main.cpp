@@ -9,7 +9,8 @@ int DELAYTIME = 300;
 
 int main (int argc, char** argv) {
 	// Initialize GUI
-	guiInit();
+	if (!ifHelp(argc, argv)) 
+		guiInit();
 	argp_parse(&Argp, argc, argv, 0, 0, 0);
 	checkTermSize();
 	checkCanvas();
