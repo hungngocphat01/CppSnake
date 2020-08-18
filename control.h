@@ -3,8 +3,7 @@
 static inline void pauseProg() {
     nodelay(stdscr, FALSE);	
     char c;
-    do
-    {
+    do {
         c = getch();
     } while (c != ' ');
     nodelay(stdscr, TRUE);
