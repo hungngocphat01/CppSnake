@@ -15,11 +15,14 @@
 Usage: snake [OPTION...]
 A simple Snake game written in C++
 
-  -b, --body=BODYC           Set body character
-  -d, --border=BORDERC       Set border character
-  -f, --food=FOODC           Set food character
-  -h, --head=HEADC           Set head character
-  -i, --interval=INVERVAL    Set the snake's speed (nanosecond)
+  -b, --body=BODYC           Set body character.
+  -B, --border=BORDERC       Set border character.
+  -D, --debug                Show debug information.
+  -f, --food=FOODC           Set food character.
+  -h, --head=HEADC           Set head character.
+  -H, --height=YSIZE         Set canvas height.
+  -i, --interval=INVERVAL    Set the snake's speed (nanosecond).
+  -W, --width=XSIZE          Set canvas width.
   -?, --help                 Give this help list
       --usage                Give a short usage message
   -V, --version              Print program version
