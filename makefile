@@ -1,12 +1,12 @@
 CC      := g++
 CCSTD   := c++17
-CCFLAGS := -lncurses
+override CCFLAGS += -lncurses
 
 # Only for Unix
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 
 ifeq ($(OS_NAME),darwin)
-	CCFLAGS += -largp
+	override CCFLAGS += -largp
 endif
 
 snake: main.cpp snake.cpp
