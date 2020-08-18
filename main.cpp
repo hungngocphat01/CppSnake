@@ -5,14 +5,14 @@
 
 int SCR_HEIGHT, SCR_WIDTH;
 bool GAMEOVER = false;
-int delaytime = 300;
+int DELAYTIME = 300;
 
 int main (int argc, char** argv) {
-	argp_parse(&Argp, argc, argv, 0, 0, 0);
-
 	// Initialize GUI
 	guiInit();
+	argp_parse(&Argp, argc, argv, 0, 0, 0);
 	checkTermSize();
+	checkCanvas();
 	srand(time(NULL));
 
 	printMenu();
@@ -33,6 +33,7 @@ int main (int argc, char** argv) {
 
 	while (1) {
 		checkTermSize();
+		checkCanvas();
 		getmaxyx(stdscr, SCR_HEIGHT, SCR_WIDTH);
 		keyread = getch();
 
@@ -53,12 +54,12 @@ int main (int argc, char** argv) {
 		s.drawfood();
 		s.drawsnake();
 		
-		// mvprintw(SCR_HEIGHT - 1, 0, "px=%d py=%d", s.prey.x, s.prey.y);
+		// mvprintw(SCR_HEIGHT - 1, 0, "px=%d py=%d", s.food.x, s.food.y);
 		// mvprintw(SCR_HEIGHT - 2, 0, "x=%d y=%d", s.head.x, s.head.y);
 		// mvprintw(my - 3, 0, "getch=%c", direction);
 		// mvprintw(my - 4, 0, "len=%d", s.len);
 		refresh();
-		napms(delaytime);
+		napms(DELAYTIME);
 	}	
 	gameOver();
 	endwin();

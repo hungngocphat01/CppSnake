@@ -10,7 +10,7 @@ struct point {
 struct snake {
 	unsigned len = 1; // Length of the snake
 	point body[50]; // Coordinates of the snake's body blocks. snake head = 0
-	point prey = {-1, -1}; // Current prey
+	point food = {-1, -1}; // Current food
 	int dx = 1; // x axis increment
 	int dy = 0; // y axis increment
 

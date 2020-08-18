@@ -1,28 +1,24 @@
+#pragma once
 #include "declarations.h"
+#include "canvas.h"
+
 #define TEXTURE_MAX_HEIGHT 12
 #define TEXTURE_MAX_WIDTH 70
 
-void pauseProg() {
-    nodelay(stdscr, FALSE);	
-    char c;
-    do
-    {
-        c = getch();
-    } while (c != ' ');
-    nodelay(stdscr, TRUE);
-}
+int CANVAS_H, CANVAS_W;
+bool SHOWDEBUG = false;
 
 void drawFrame() {
     // Draw vertical bars
-    for (unsigned i = 0; i < SCR_HEIGHT; i++) {
-        mvprintw(i, 0, borderc);
-        mvprintw(i, SCR_WIDTH - 1, borderc);
+    for (unsigned i = cvTY(); i <= cvBY(); i++) {
+        mvprintw(i, cvLX(), BORDERC);
+        mvprintw(i, cvRX(), BORDERC);
     }
 
     // Draw horizontal bars
-    for (unsigned i = 0; i < SCR_WIDTH; i++) {
-        mvprintw(0, i, borderc);
-        mvprintw(SCR_HEIGHT - 1, i, borderc);
+    for (unsigned i = cvLX(); i <= cvRX(); i++) {
+        mvprintw(cvTY(), i, BORDERC);
+        mvprintw(cvBY(), i, BORDERC);
     }
 }
 
@@ -30,11 +26,24 @@ inline void guiInit() {
     initscr();
 	noecho();
 	curs_set(FALSE);
-    getmaxyx(stdscr, SCR_HEIGHT, SCR_WIDTH);	
+    getmaxyx(stdscr, SCR_HEIGHT, SCR_WIDTH);
+
+    // Default value
+    CANVAS_H = SCR_HEIGHT - 1;
+    CANVAS_W = SCR_WIDTH - 1;
 
     // Disable getch() wait
     cbreak();
 	nodelay(stdscr, TRUE);	
+}
+
+inline void showDebugInfo() {
+    if (SHOWDEBUG) {
+        mvprintw(0, 0, argp_program_version);
+        mvprintw(1, 0, "Screen size: %dx%d", SCR_WIDTH, SCR_HEIGHT);
+        mvprintw(2, 0, "Canvas size: %dx%d", CANVAS_W, CANVAS_H);
+        refresh();
+    }
 }
 
 void printFromFile(const char* filename) {
@@ -77,18 +86,14 @@ void printFromFile(const char* filename) {
 inline void printMenu() {
     clear();
     printFromFile("./texture/title.dat");
-    pauseProg();
-}
-
-inline void pauseGame() {
-    clear();
-    printFromFile("./texture/pause.dat");
+    showDebugInfo();
     pauseProg();
 }
 
 inline void gameOver() {
     clear();
     printFromFile("./texture/gameover.dat");
+    showDebugInfo();
     pauseProg();
 }
 
@@ -100,4 +105,11 @@ void checkTermSize() {
         pauseProg();
         getmaxyx(stdscr, SCR_HEIGHT, SCR_WIDTH);	
 	}
+}
+
+inline void pauseGame() {
+    clear();
+    printFromFile("./texture/pause.dat");
+    showDebugInfo();
+    pauseProg();
 }
