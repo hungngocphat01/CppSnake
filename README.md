@@ -47,3 +47,7 @@ $ cd CppSnake
 $ make
 $ ./snake
 ```
+If you have trouble compiling on some Linux distros, use the following instead:
+```bash
+$ make CCFLAGS=-largp
+```
