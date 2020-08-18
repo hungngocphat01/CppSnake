@@ -1,2 +1,13 @@
+CC      := g++
+CCSTD   := c++17
+CCFLAGS := -lncurses
+
+# Only for Unix
+OS_NAME := $(shell uname -s | tr A-Z a-z)
+
+ifeq ($(OS_NAME),Darwin)
+	CCFLAGS += -largp
+endif
+
 snake: main.cpp snake.cpp
-	g++ $^ -o $@ -lncurses -largp -std=c++17 -g
+	$(CC) $^ -o $@ -std=$(CCSTD) $(CCFLAGS)
