@@ -5,7 +5,7 @@ CCFLAGS := -lncurses
 # Only for Unix
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 
-ifeq ($(OS_NAME),Darwin)
+ifeq ($(OS_NAME),darwin)
 	CCFLAGS += -largp
 endif
 
