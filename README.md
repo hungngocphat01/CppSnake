@@ -11,7 +11,7 @@
 - The max length is 50, going beyond that can cause the game to be crashed. This is due the snake's blocks' coordinates are statically allocated, will implement another method later.
 - If you resize the terminal window while playing, the game interface will be redrawn to fit the new size.<br>
 If no constant canvas size is determined, the canvas will be resized as well.
-- Cheat code: ``/`` to increase the length by 1 block without having to eat any food.
+- Cheat code: ``/`` to increase the length by 1 block without having to eat any food. Only present if debug mode is enabled.
 ## Customization
 ```
 Usage: snake [OPTION...]
@@ -36,9 +36,7 @@ A simple Snake game written in C++
 v1.0: initial release.
 v2.0: add basic customization (snake head, body, game border, etc.).
 v3.0: add customizable canvas size.
-
-####### UPDATE ROUTINE #######
-v4.0: Save/load game.
+v4.0: save/load supported. No limit in snake length. Add score bar.
 ```
 ## Building and running
 ```bash
