@@ -6,6 +6,7 @@
 int SCR_HEIGHT, SCR_WIDTH;
 bool GAMEOVER = false;
 int DELAYTIME = 300;
+char LOADFILENAME[255];
 
 int main (int argc, char** argv) {
 	// Initialize GUI
@@ -21,16 +22,28 @@ int main (int argc, char** argv) {
 	int keyread;
 
 	snake s;
-	s.head = {SCR_WIDTH/2, SCR_HEIGHT/2};
-	s.genfood();
+	if (strlen(LOADFILENAME) != 0) {
+		if(!s.read(LOADFILENAME)){
+			endwin();
+			return -1;
+		}
+		else {
+			SCORE = (s.len - 1) * 10;
+		}
+	}
+	else {
+		s.head = {SCR_WIDTH/2, SCR_HEIGHT/2};
+		s.head = {SCR_WIDTH/2, SCR_HEIGHT/2};
+		s.genfood();
+	}
 	s.drawfood();
 	refresh();
 	
-	const char* guidestr = "Press P to pause, Q to quit.";
+	const char* guidestr = "Press P to pause, Q to quit, O to save.";
 	clear();
 	mvprintw(SCR_HEIGHT/2 - 1, SCR_WIDTH/2 - strlen(guidestr)/2 + 1, guidestr);
 	refresh();
-	napms(1000);
+	napms(2000);
 
 	while (1) {
 		checkTermSize();
@@ -40,13 +53,17 @@ int main (int argc, char** argv) {
 
 		// Easter egg
 		if (keyread == '/') {
-			s.grow();
+			if (DEBUGMODE)
+				s.grow();
 		}
 		else if (keyread == 'q' || GAMEOVER) {
 			break;
 		}
 		else if (keyread == 'p') {
 			pauseGame();
+		}
+		else if (keyread == 'o') {
+			showSavePrompt(s);
 		}
 
 		clear();
@@ -55,7 +72,6 @@ int main (int argc, char** argv) {
 		s.drawfood();
 		s.drawsnake();
 		
-		// mvprintw(SCR_HEIGHT - 1, 0, "px=%d py=%d", s.food.x, s.food.y);
 		// mvprintw(SCR_HEIGHT - 2, 0, "x=%d y=%d", s.head.x, s.head.y);
 		// mvprintw(my - 3, 0, "getch=%c", direction);
 		// mvprintw(my - 4, 0, "len=%d", s.len);
