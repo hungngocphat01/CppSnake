@@ -14,11 +14,12 @@
 extern int SCR_HEIGHT, SCR_WIDTH;
 extern int CANVAS_H, CANVAS_W;
 extern bool GAMEOVER;
-extern bool SHOWDEBUG;
+extern bool DEBUGMODE;
 extern char BODYC[2], HEADC[2], BORDERC[2], FOODC[2];
 extern int DELAYTIME;
 extern const char* argp_program_version;
 extern unsigned SCORE;
+extern char LOADFILENAME[255];
 
 #define MINW 70
 #define MINH 20

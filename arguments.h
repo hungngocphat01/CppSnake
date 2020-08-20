@@ -1,10 +1,10 @@
 #pragma once
 #include "declarations.h"
 
-const char* argp_program_version = "CppSnake 3.0";
-const char* doc = "A simple Snake game written in C++";
+const char* argp_program_version = "CppSnake 4.0";
+static const char* doc = "A simple Snake game written in C++";
 
-argp_option options[] = {
+static argp_option options[] = {
     {"body", 'b', "BODYC", 0, "Set body character."},
     {"head", 'h', "HEADC", 0, "Set head character."},
     {"border", 'B', "BORDERC", 0, "Set border character."},
@@ -13,10 +13,11 @@ argp_option options[] = {
     {"width", 'W', "XSIZE", 0, "Set canvas width."},
     {"height", 'H', "YSIZE", 0, "Set canvas height."},
     {"debug", 'D', 0, 0, "Show debug information."},
+    {"load", 'l', "FILENAME", 0, "Load game from filename"},
     { 0 }
 };
 
-bool ifHelp(int argc, char** argv) {
+static bool ifHelp(int argc, char** argv) {
     for (unsigned i = 0; i < argc; i++) {
         if (!strcmp(argv[i], "--help")) {
             return true;
@@ -53,9 +54,13 @@ static error_t parse_opt(int key, char* arg, argp_state* state) {
         CANVAS_H = atoi(arg);
         break;
     case 'D':
-        SHOWDEBUG = true;
+        DEBUGMODE = true;
+        break;
+    case 'l':
+        strcpy(LOADFILENAME, arg);
         break;
     default:
+        endwin();
         return ARGP_ERR_UNKNOWN;
     }
     return 0;
