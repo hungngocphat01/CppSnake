@@ -30,6 +30,11 @@ void snake::drawfood() {
 
 void snake::grow() {
     this->len++;
+    if (this->len >= this->alloc_len - 1) {
+        this->alloc_len += 10;
+        this->body = (point*)realloc(this->body, this->alloc_len * sizeof(point));
+    }
+    SCORE = (this->len - 1)*10;
 }
 
 bool snake::overlaps(point a) {
@@ -79,4 +84,59 @@ void snake::move(char direction) {
     if (this->head.x >= cvRX() || this->head.x <= cvLX() || this->head.y >= cvBY() || this->head.y < cvTY()) {
         GAMEOVER = true;
     }
+}
+
+bool snake::write(char* filename) {
+    FILE* fp = fopen(filename, "wb");
+    if (!fp) {
+        clear();
+        mvprintw(0, 0, "A file cannot be created!!!\nPress SPACE to resume.");
+        refresh();
+        pauseProg();
+        return false;
+    }
+    // Validate signal
+    fwrite("MIKIMIKI", 8, 1, fp);
+    fwrite(&len, sizeof(len), 1, fp);
+    fwrite(&alloc_len, sizeof(alloc_len), 1, fp);
+    fwrite(body, sizeof(point), alloc_len, fp);
+    fwrite(&head, sizeof(head), 1, fp);
+    fwrite(&food, sizeof(food), 1, fp);
+    fwrite(&dx, sizeof(dx), 1, fp);
+    fwrite(&dy, sizeof(dy), 1, fp);
+    fclose(fp);
+    return true;
+}
+
+bool snake::read(char* filename) {
+    FILE* fp = fopen(filename, "rb");
+    if (!fp) {
+        clear();
+        mvprintw(0, 0, "File \"%s\" can't be opened.\nEither corrupted or not exist.\nPress SPACE to exit.", filename);
+        refresh();
+        pauseProg();
+        return false;
+    }
+
+    char mikimiki[8];
+    fread(mikimiki, 8, 1, fp);
+    if (!!memcmp(mikimiki, "MIKIMIKI", 8)) {
+        clear();
+        mvprintw(0, 0, "File \"%s\" is corrupted.\nPress SPACE to exit.", filename);
+        refresh();
+        pauseProg();
+        fclose(fp);
+        return false;
+    }
+
+    fread(&len, sizeof(len), 1, fp);
+    fread(&alloc_len, sizeof(alloc_len), 1, fp);
+    body = (point*)realloc(body, alloc_len * sizeof(point));
+    fread(body, sizeof(point), alloc_len, fp);
+    fread(&head, sizeof(head), 1, fp);
+    fread(&food, sizeof(food), 1, fp);
+    fread(&dx, sizeof(dx), 1, fp);
+    fread(&dy, sizeof(dy), 1, fp);
+    fclose(fp);
+    return true;
 }
