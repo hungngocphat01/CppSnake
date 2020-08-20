@@ -6,8 +6,8 @@ override CCFLAGS += -lncurses
 OS_NAME := $(shell uname -s | tr A-Z a-z)
 
 ifeq ($(OS_NAME),darwin)
-	CCFLAGS += -largp
+	override CCFLAGS += -largp
 endif
 
 snake: main.cpp snake.cpp
-	$(CC) $^ -o $@ -std=$(CCSTD) $(CCFLAGS)
+	$(CC) $^ -o $@ -std=$(CCSTD) $(CCFLAGS) -g
