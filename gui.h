@@ -6,7 +6,7 @@
 #define TEXTURE_MAX_WIDTH 70
 
 int CANVAS_H, CANVAS_W;
-bool SHOWDEBUG = false;
+bool DEBUGMODE = false;
 
 void drawFrame() {
     // Draw vertical bars
@@ -20,6 +20,14 @@ void drawFrame() {
         mvprintw(cvTY(), i, BORDERC);
         mvprintw(cvBY(), i, BORDERC);
     }
+
+    // Print score
+    char scorestr[20];
+    sprintf(scorestr, "SCORE: %d", SCORE);
+    unsigned scorestr_x = (cvRX() - cvLX())/2 - strlen(scorestr)/2;
+    mvprintw(cvTY(), scorestr_x, scorestr);
+    mvprintw(cvTY(), scorestr_x - 1, " ");
+    mvprintw(cvTY(), scorestr_x + strlen(scorestr), " ");
 }
 
 inline void guiInit() {
@@ -38,10 +46,13 @@ inline void guiInit() {
 }
 
 inline void showDebugInfo() {
-    if (SHOWDEBUG) {
+    if (DEBUGMODE) {
         mvprintw(0, 0, argp_program_version);
         mvprintw(1, 0, "Screen size: %dx%d", SCR_WIDTH, SCR_HEIGHT);
         mvprintw(2, 0, "Canvas size: %dx%d", CANVAS_W, CANVAS_H);
+        if (strlen(LOADFILENAME) != 0) {
+            mvprintw(3, 0, "Game loaded from: %s", LOADFILENAME);
+        }
         refresh();
     }
 }
@@ -112,4 +123,44 @@ inline void pauseGame() {
     printFromFile("./texture/pause.dat");
     showDebugInfo();
     pauseProg();
+}
+
+void notify(char* content) {
+    clear();
+    mvprintw(0, 0, content);
+    refresh();
+    pauseProg();
+}
+
+inline bool isValidChar(char c) {
+    return (c >= 32 && c <= 126 && c != '/' && c != ':');
+}
+
+void showSavePrompt(snake s) {
+    clear();
+    mvprintw(0, 0, "Enter savefile name: ");
+    refresh();
+
+    curs_set(TRUE);
+    nocbreak();
+    nodelay(stdscr, FALSE);	
+    echo();
+    
+    char filename[255];
+    fgets(filename, 255, stdin);
+    filename[strlen(filename) - 1] = '\0'; // Remove \n
+    curs_set(FALSE);
+    cbreak();
+    noecho();
+
+    clear();
+    if (s.write(filename)) {
+        mvprintw(0, 0, "Saved successfully to \"%s\". Press SPACE to resume.", filename);
+    }
+    else {
+        mvprintw(0, 0, "Save failed.\nPress SPACE to resume");
+    }
+    refresh();
+    pauseProg();
+    
 }
