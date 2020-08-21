@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+#include <exception>
 
 #ifdef __APPLE__
     // Must "brew install argp-standalone" first
@@ -11,14 +12,14 @@
     #include <argp.h>
 #endif
 
-extern int SCR_HEIGHT, SCR_WIDTH;
-extern int CANVAS_H, CANVAS_W;
+extern int32_t SCR_HEIGHT, SCR_WIDTH;
+extern int32_t CANVAS_H, CANVAS_W;
 extern bool GAMEOVER;
 extern bool DEBUGMODE;
 extern char BODYC[2], HEADC[2], BORDERC[2], FOODC[2];
-extern int DELAYTIME;
+extern int32_t DELAYTIME;
 extern const char* argp_program_version;
-extern unsigned SCORE;
+extern int32_t SCORE;
 extern char LOADFILENAME[255];
 
 #define MINW 70
