@@ -13,7 +13,7 @@ static argp_option options[] = {
     {"width", 'W', "XSIZE", 0, "Set canvas width."},
     {"height", 'H', "YSIZE", 0, "Set canvas height."},
     {"debug", 'D', 0, 0, "Show debug information."},
-    {"load", 'l', "FILENAME", 0, "Load game from filename"},
+    {"load", 'l', "FILENAME", 0, "Load game from filename."},
     { 0 }
 };
 
