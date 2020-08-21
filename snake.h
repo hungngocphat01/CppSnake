@@ -1,21 +1,22 @@
-#include <vector>
+#include <stdlib.h>
 
 struct point {
-	int x = 0;
-	int y = 0;
+	int32_t x = 0;
+	int32_t y = 0;
 };
 
 #define DEFAULT_HEAD "@"
 #define DEFAULT_BODY "O"
 #define DEFAULT_FOOD "X"
 
-struct snake {
-	unsigned len = 1; // Length of the snake
-	unsigned alloc_len = 10;
-	point* body = (point*)malloc(alloc_len * sizeof(point));
+class snake {
+public:
+	int32_t len = 1; // Length of the snake
+	int32_t alloc_len = 10;
+	point* body = (point*)malloc(this->alloc_len * sizeof(point));;
 	point food = {-1, -1}; // Current food
-	int dx = 1; // x axis increment
-	int dy = 0; // y axis increment
+	int32_t dx = 1; // x axis increment
+	int32_t dy = 0; // y axis increment
 
 	// Reference to the snake's head
 	point& head = body[0];
