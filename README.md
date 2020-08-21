@@ -37,6 +37,7 @@ v1.0: initial release.
 v2.0: add basic customization (snake head, body, game border, etc.).
 v3.0: add customizable canvas size.
 v4.0: save/load supported. No limit in snake length. Add score bar.
+v4.1: fix score bar, fix cannot enter savefile name, fix memory leak.
 ```
 ## Building and running
 ```bash
