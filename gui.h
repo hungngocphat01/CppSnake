@@ -5,7 +5,7 @@
 #define TEXTURE_MAX_HEIGHT 12
 #define TEXTURE_MAX_WIDTH 70
 
-int CANVAS_H, CANVAS_W;
+int32_t CANVAS_H, CANVAS_W;
 bool DEBUGMODE = false;
 
 void drawFrame() {
@@ -24,7 +24,7 @@ void drawFrame() {
     // Print score
     char scorestr[20];
     sprintf(scorestr, "SCORE: %d", SCORE);
-    unsigned scorestr_x = (cvRX() - cvLX())/2 - strlen(scorestr)/2;
+    unsigned scorestr_x = (SCR_WIDTH)/2 - strlen(scorestr)/2;
     mvprintw(cvTY(), scorestr_x, scorestr);
     mvprintw(cvTY(), scorestr_x - 1, " ");
     mvprintw(cvTY(), scorestr_x + strlen(scorestr), " ");
@@ -147,8 +147,7 @@ void showSavePrompt(snake s) {
     echo();
     
     char filename[255];
-    fgets(filename, 255, stdin);
-    filename[strlen(filename) - 1] = '\0'; // Remove \n
+    getstr(filename);
     curs_set(FALSE);
     cbreak();
     noecho();
