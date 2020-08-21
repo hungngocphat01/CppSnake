@@ -3,23 +3,23 @@
 #include "control.h"
 
 // Canvas Left X
-inline int cvLX() {
+inline int32_t cvLX() {
     return (SCR_WIDTH - 1 - CANVAS_W)/2;
 }
 // Canvas Right X
-inline int cvRX() {
+inline int32_t cvRX() {
     return cvLX() + CANVAS_W;
 }
 // Canvas Top Y
-inline int cvTY() {
+inline int32_t cvTY() {
     return (SCR_HEIGHT - 1 - CANVAS_H)/2;
 }
 // Canvas Bottom Y
-inline int cvBY() {
+inline int32_t cvBY() {
     return cvTY() + CANVAS_H;
 }
 
-inline bool divisible(int a, int b) {
+inline bool divisible(int32_t a, int32_t b) {
     return (a % b == 0);
 }
 
