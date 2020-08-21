@@ -4,9 +4,9 @@
 
 char BODYC[2] = "O", HEADC[2] = "@", FOODC[2] = "X";
 char BORDERC[2] = "#";
-unsigned SCORE = 0;
+int32_t SCORE = 0;
 
-int randomInt(int start, int end) {
+int32_t randomInt(int start, int end) {
     return rand() % (end - start + 1) + start;
 }
 
@@ -97,6 +97,8 @@ bool snake::write(char* filename) {
     }
     // Validate signal
     fwrite("MIKIMIKI", 8, 1, fp);
+    fwrite(&CANVAS_W, sizeof(CANVAS_W), 1, fp);
+    fwrite(&CANVAS_H, sizeof(CANVAS_W), 1, fp);
     fwrite(&len, sizeof(len), 1, fp);
     fwrite(&alloc_len, sizeof(alloc_len), 1, fp);
     fwrite(body, sizeof(point), alloc_len, fp);
@@ -128,7 +130,8 @@ bool snake::read(char* filename) {
         fclose(fp);
         return false;
     }
-
+    fread(&CANVAS_W, sizeof(CANVAS_W), 1, fp);
+    fread(&CANVAS_H, sizeof(CANVAS_W), 1, fp);
     fread(&len, sizeof(len), 1, fp);
     fread(&alloc_len, sizeof(alloc_len), 1, fp);
     body = (point*)realloc(body, alloc_len * sizeof(point));
