@@ -125,17 +125,6 @@ inline void pauseGame() {
     pauseProg();
 }
 
-void notify(char* content) {
-    clear();
-    mvprintw(0, 0, content);
-    refresh();
-    pauseProg();
-}
-
-inline bool isValidChar(char c) {
-    return (c >= 32 && c <= 126 && c != '/' && c != ':');
-}
-
 void showSavePrompt(snake s) {
     clear();
     mvprintw(0, 0, "Enter savefile name: ");
