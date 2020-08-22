@@ -5,10 +5,6 @@ struct point {
 	int32_t y = 0;
 };
 
-#define DEFAULT_HEAD "@"
-#define DEFAULT_BODY "O"
-#define DEFAULT_FOOD "X"
-
 class snake {
 public:
 	int32_t len = 1; // Length of the snake
