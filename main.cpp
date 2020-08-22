@@ -5,7 +5,7 @@
 
 int32_t SCR_HEIGHT, SCR_WIDTH;
 bool GAMEOVER = false;
-int32_t DELAYTIME = 300;
+int32_t DELAYTIME = 200;
 char LOADFILENAME[255];
 
 int main (int argc, char** argv) {
@@ -86,6 +86,7 @@ int main (int argc, char** argv) {
 	}
 
 	free(s.body);
+	gameOver();
 	endwin();
 	return 0;
 }
