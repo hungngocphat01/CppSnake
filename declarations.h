@@ -21,6 +21,7 @@ extern int32_t DELAYTIME;
 extern const char* argp_program_version;
 extern int32_t SCORE;
 extern char LOADFILENAME[255];
+extern char CUSTOMPATTERN[20];
 
 #define MINW 70
 #define MINH 20

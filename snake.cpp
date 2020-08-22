@@ -3,6 +3,7 @@
 #include "canvas.h"
 
 char BODYC[2] = "O", HEADC[2] = "@", FOODC[2] = "X";
+char CUSTOMPATTERN[20];
 char BORDERC[2] = "#";
 int32_t SCORE = 0;
 
@@ -10,10 +11,26 @@ int32_t randomInt(int start, int end) {
     return rand() % (end - start + 1) + start;
 }
 
+inline unsigned wrap(int i, int start, int limit) {
+    return start + (i - start) % (limit - start);
+}
+
 void snake::drawsnake() {
-    mvprintw(this->head.y, this->head.x, HEADC);
-    for (unsigned i = 1; i < this->len; i++) {
-        mvprintw(this->body[i].y, this->body[i].x, BODYC);
+    if (strlen(CUSTOMPATTERN) == 0) {
+        mvprintw(this->head.y, this->head.x, HEADC);
+        for (unsigned i = 1; i < this->len; i++) {
+            mvprintw(this->body[i].y, this->body[i].x, BODYC);
+        }
+    }
+    else {
+        // Head is the first byte of the pattern
+        for (unsigned i = 0; i < this->len; i++) {
+            if (i < strlen(CUSTOMPATTERN))
+                memcpy(BODYC, CUSTOMPATTERN + i, 1);
+            else
+                memcpy(BODYC, CUSTOMPATTERN + wrap(i, 0, strlen(CUSTOMPATTERN)), 1);
+            mvprintw(this->body[i].y, this->body[i].x, BODYC);
+        } 
     }
 }
 

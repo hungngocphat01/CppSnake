@@ -1,7 +1,7 @@
 #pragma once
 #include "declarations.h"
 
-const char* argp_program_version = "CppSnake 4.1";
+const char* argp_program_version = "CppSnake 4.2";
 static const char* doc = "A simple Snake game written in C++";
 
 static argp_option options[] = {
