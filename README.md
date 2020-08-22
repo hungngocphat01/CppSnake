@@ -15,15 +15,15 @@ If no constant canvas size is specified, the canvas will be the entire terminal,
 ## Customization
 ```
 Usage: snake [OPTION...]
-
   -b, --body=BODYC           Set body character.
   -B, --border=BORDERC       Set border character.
   -D, --debug                Show debug information.
   -f, --food=FOODC           Set food character.
   -h, --head=HEADC           Set head character.
   -H, --height=YSIZE         Set canvas height.
-  -i, --interval=INVERVAL    Set the snake's speed (nanosecond).
+  -i, --interval=INVERVAL    Set the snake's speed (milisecond).
   -l, --load=FILENAME        Load game from filename.
+  -p, --pattern=STRING       Set a custom pattern for the snake (override -h and -b).
   -W, --width=XSIZE          Set canvas width.
   -?, --help                 Give this help list
       --usage                Give a short usage message
@@ -37,6 +37,7 @@ v2.0: add basic customization (snake head, body, game border, etc.).
 v3.0: add customizable canvas size.
 v4.0: save/load supported. No limit in snake length. Add score bar.
 v4.1: fix score bar, fix cannot enter savefile name, fix memory leak.
+v4.2: add custom pattern support.
 ```
 ## Building and running
 ```bash
