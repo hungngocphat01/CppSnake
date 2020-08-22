@@ -39,6 +39,8 @@ v4.0: save/load supported. No limit in snake length. Add score bar.
 v4.1: fix score bar, fix cannot enter savefile name, fix memory leak.
 v4.2: add custom pattern support.
 ```
+## Known issues
+- Sometimes when played in a small canvas, the snake may "eat" itself, resulting in ``GAME OVER`` (bruh I don't know why).
 ## Building and running
 ```bash
 $ git clone this_repository
