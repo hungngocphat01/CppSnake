@@ -9,11 +9,12 @@ static argp_option options[] = {
     {"head", 'h', "HEADC", 0, "Set head character."},
     {"border", 'B', "BORDERC", 0, "Set border character."},
     {"food", 'f', "FOODC", 0, "Set food character."},
-    {"interval", 'i', "INVERVAL", 0, "Set the snake's speed (nanosecond)."},
+    {"interval", 'i', "INVERVAL", 0, "Set the snake's speed (milisecond)."},
     {"width", 'W', "XSIZE", 0, "Set canvas width."},
     {"height", 'H', "YSIZE", 0, "Set canvas height."},
     {"debug", 'D', 0, 0, "Show debug information."},
     {"load", 'l', "FILENAME", 0, "Load game from filename."},
+    {"pattern", 'p', "STRING", 0, "Set a custom pattern for the snake (override -h and -b)."},
     { 0 }
 };
 
@@ -58,6 +59,14 @@ static error_t parse_opt(int key, char* arg, argp_state* state) {
         break;
     case 'l':
         strcpy(LOADFILENAME, arg);
+        break;
+    case 'p':
+        if (strlen(arg) > 20) {
+            strncpy(CUSTOMPATTERN, arg, 20);
+        }
+        else {
+            strcpy(CUSTOMPATTERN, arg);
+        }
         break;
     default:
         endwin();
