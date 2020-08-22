@@ -7,10 +7,10 @@
 - On macOS: ``argp-standalone`` Homebrew package.
 ## How to play
 - Use ``WASD`` to navigate, eat the food to grow up.
+- Press ``Q`` to quit, ``P`` to pause or ``O`` to save the game.
 - The snake's head cannot overlap the walls nor its body.
-- The max length is 50, going beyond that can cause the game to be crashed. This is due the snake's blocks' coordinates are statically allocated, will implement another method later.
-- If you resize the terminal window while playing, the game interface will be redrawn to fit the new size.<br>
-If no constant canvas size is determined, the canvas will be resized as well.
+- If the terminal window is resized while playing, the game interface will be redrawn to fit the new size.<br>
+If no constant canvas size is specified, the canvas will be the entire terminal, so it will be resized as well.
 - Cheat code: ``/`` to increase the length by 1 block without having to eat any food. Only present if debug mode is enabled.
 ## Customization
 ```
