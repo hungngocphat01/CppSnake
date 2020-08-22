@@ -2,9 +2,9 @@
 - This is a simple Snake game written using the ``ncurses`` library in C++.
 ## Requirements
 - A POSIX-compatible operating system (macOS, FreeBSD, Linux, etc.). Cannot run natively on Windows due to the absence of ``ncurses`` library.
-- GNU gcc.
+- GNU gcc.`
 - A terminal emulator with a minimum size of 70x20 (to ensure ASCII arts fit within the terminal's canvas).
-- On macOS: ``argp-standalone`` Homebrew package.
+- ``argp.h`` header file: ``argp-standalone`` Homebrew package (macOS) or gnulibc (Linux).
 ## How to play
 - Use ``WASD`` to navigate, eat the food to grow up.
 - Press ``Q`` to quit, ``P`` to pause or ``O`` to save the game.
