@@ -1,7 +1,7 @@
 # CppSnake
 - This is a simple Snake game written using the ``ncurses`` library in C++.
 ## Requirements
-- A POSIX-compatible operating system (macOS, FreeBSD, Linux, etc.). You can also try it on Windows with ``argp`` and ``ncurses`` installed (somehow).
+- A POSIX-compatible operating system (macOS, FreeBSD, Linux, etc.). Cannot run natively on Windows due to the absence of ``ncurses`` library.
 - GNU gcc.
 - A terminal emulator with a minimum size of 70x20 (to ensure ASCII arts fit within the terminal's canvas).
 - On macOS: ``argp-standalone`` Homebrew package.
