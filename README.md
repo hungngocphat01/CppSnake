@@ -5,6 +5,13 @@
 - GNU gcc.`
 - A terminal emulator with a minimum size of 70x20 (to ensure ASCII arts fit within the terminal's canvas).
 - ``argp.h`` header file: ``argp-standalone`` Homebrew package (macOS) or gnulibc (Linux).
+- Developed on macOS 10.14 Mojave.
+
+![](screenshots/screenshot1.png)
+![](screenshots/screenshot2.png)
+![](screenshots/screenshot3.png)
+![](screenshots/screenshot4.png)
+
 ## How to play
 - Use ``WASD`` to navigate, eat the food to grow up.
 - Press ``Q`` to quit, ``P`` to pause or ``O`` to save the game.
